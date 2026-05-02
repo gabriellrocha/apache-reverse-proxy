@@ -1,0 +1,14 @@
+services:
+  spring-app:
+    build: .
+    container_name: spring-app
+
+  apache:
+    image: httpd:2.4
+    container_name: apache-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - ./apache/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    depends_on:
+      - spring-app
